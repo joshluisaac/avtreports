@@ -21,7 +21,7 @@ public class AccessSummaryReportFakeData {
     InputStream inputStream =
             Thread.currentThread()
                     .getContextClassLoader()
-                    .getResourceAsStream("accesssummary/accessSummaryData.json");
+                    .getResourceAsStream("AccessSummary/AccessSummaryData.json");
     JsonNode parent = new ObjectMapper().readTree(inputStream);
     return new ObjectMapper()
             .readValue(

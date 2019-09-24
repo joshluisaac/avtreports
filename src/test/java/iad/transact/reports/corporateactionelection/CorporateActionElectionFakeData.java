@@ -14,7 +14,7 @@ import java.util.function.Function;
 public class CorporateActionElectionFakeData {
 
   private static final String PAYLOAD =
-      "corporateactionelection/CorporateActionElectionSampleDataSet.json";
+      "CorporateActionElection/CorporateActionElectionSampleDataSet.json";
 
   @SneakyThrows
   private static Function<String, JsonNode> getJsonMainNode() {
