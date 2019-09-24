@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Footer" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<template><![CDATA["Common/Styles.jrtx"]]></template>
+	<parameter name="footerText" class="java.lang.String"/>
+	<pageFooter>
+		<band height="19">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="GenericFooter" positionType="Float" mode="Transparent" x="0" y="0" width="480" height="10" uuid="53bbfac5-2586-4779-88f0-ccf53f7a5e84"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Master">
+				<reportElement key="" style="GenericFooter" positionType="Float" x="730" y="0" width="50" height="10" uuid="30cfb107-ac98-4bc1-8504-6d8d07e3ae12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{MASTER_CURRENT_PAGE} + " of " + $V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

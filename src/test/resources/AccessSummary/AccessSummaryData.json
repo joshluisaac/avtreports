@@ -1,0 +1,20 @@
+{
+  "Main": {
+    "data": [
+      {
+        "loggedInAs": "Christie, Nigel & Ford, Elsie (Investor) (000-673-324)",
+        "accessed": "",
+        "eventDateTime": "2018-11-01T19:00:16.362",
+        "eventDisplayMessage": "Generated Portfolio Valuation",
+        "confirmationKey": ""
+      },
+      {
+        "loggedInAs": "Brookes, Maureen (Investor) (000-052-670)",
+        "accessed": "",
+        "eventDateTime": "2018-11-02T04:55:04.374",
+        "eventDisplayMessage": "Accessed AssetMemo &reg;",
+        "confirmationKey": ""
+      }
+    ]
+  }
+}

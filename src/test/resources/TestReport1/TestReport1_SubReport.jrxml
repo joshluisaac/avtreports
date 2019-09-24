@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestReport1_SubReport" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c74a32e3-aa20-4849-91d5-18b828819cba">
+	<parameter name="REPORT_DATA" class="iad.transact.reports.testreport.TestReportFakeData"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="58" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="30" y="21" width="100" height="30" uuid="8fc7f299-d7aa-43e8-a819-c3a7037c16cb"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="20" width="180" height="30" uuid="1921ae90-5f73-453b-98c9-a5eb6d4a7f23">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4ac19f5-c38e-4c6b-819f-9a23df2aa8de"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="330" y="20" width="130" height="30" uuid="bbeea544-f9f0-4ca7-8540-9acc99bc88d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bad19c12-5605-4cc6-bbb9-7656f20c629c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{outstandingBalance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

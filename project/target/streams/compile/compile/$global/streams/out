@@ -1,0 +1,11 @@
+[error] O:\Prj\omSource\MS6\transact\reports\project\SbtJasperReports.scala:35:69: polymorphic expression cannot be instantiated to expected type;
+[error]  found   : [B >: sbt.Setting[_], That](that: scala.collection.GenTraversableOnce[B])(implicit bf: scala.collection.generic.CanBuildFrom[Seq[sbt.Setting[_]],B,That])That
+[error]     (which expands to)  [B >: sbt.Def.Setting[_], That](that: scala.collection.GenTraversableOnce[B])(implicit bf: scala.collection.generic.CanBuildFrom[Seq[sbt.Def.Setting[_]],B,That])That
+[error]  required: Seq[sbt.Setting[_]]
+[error]     (which expands to)  Seq[sbt.Def.Setting[_]]
+[error]       jasperTaskSettings(jasperReports, "jrxml", "jrxml", copyFile) ++
+[error]                                                                     ^
+[error] O:\Prj\omSource\MS6\transact\reports\project\SbtJasperReports.scala:37:3: a pure expression does nothing in statement position; multiline expressions may require enclosing parentheses
+[error]   jasperGraphicContents
+[error]   ^
+[error] two errors found
