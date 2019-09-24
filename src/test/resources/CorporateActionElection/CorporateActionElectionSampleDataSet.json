@@ -409,6 +409,6 @@
     "failedElectionSize": 0,
     "successfulElectionSize": 3,
     "electionOnDate": "10/09/2019 10:25:39 am",
-    "isMifidReportable": false
+    "isMifidReportable": true
   }
 }

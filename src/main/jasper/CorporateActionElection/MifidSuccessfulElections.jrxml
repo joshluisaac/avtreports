@@ -184,14 +184,14 @@
 				<text><![CDATA[Adviser]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="TableHeadingBlue" x="80" y="0" width="80" height="28" uuid="6348c9ff-3c89-4b70-9fe5-9dfdf894f31a">
+				<reportElement style="TableHeadingBlue" x="80" y="0" width="120" height="28" uuid="6348c9ff-3c89-4b70-9fe5-9dfdf894f31a">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Investor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="TableHeadingBlue" x="160" y="0" width="80" height="28" uuid="bb83a150-94e0-4e01-8755-86e4236b1d74">
+				<reportElement style="TableHeadingBlue" x="200" y="0" width="40" height="28" uuid="bb83a150-94e0-4e01-8755-86e4236b1d74">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
