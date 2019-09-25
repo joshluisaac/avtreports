@@ -12,9 +12,6 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
 	<parameter name="SUCCESSFUL_ELECTIONS_SIZE" class="java.lang.Integer"/>
-	<queryString language="JSON">
-		<![CDATA[Data]]>
-	</queryString>
 	<field name="adviserName" class="java.lang.String"/>
 	<field name="investorName" class="java.lang.String"/>
 	<field name="wrapperName" class="java.lang.String"/>
