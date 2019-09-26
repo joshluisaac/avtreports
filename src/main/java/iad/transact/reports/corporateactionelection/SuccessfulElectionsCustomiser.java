@@ -25,7 +25,7 @@ public class SuccessfulElectionsCustomiser
           "previouslyElectedUnitsHeaderKey",
           "newlyElectedUnitsHeaderKey",
           "newlyElectedPercentageHeaderKey");
-  private static final List<String> MIFID_COLUMN_FIELD_KEYS =
+/*  private static final List<String> MIFID_COLUMN_FIELD_KEYS =
       List.of(
           "adviserFieldKey",
           "investorFieldKey",
@@ -36,7 +36,7 @@ public class SuccessfulElectionsCustomiser
           "decisionMakerFieldKey",
           "previouslyElectedUnitsFieldKey",
           "newlyElectedUnitsFieldKey",
-          "newlyElectedPercentageFieldKey");
+          "newlyElectedPercentageFieldKey");*/
 
   void getMifidHeaderElements(){
 
@@ -44,17 +44,71 @@ public class SuccessfulElectionsCustomiser
 
   @Override
   public void customise(CorporateActionElectionReportData data, JasperDesign design) {
+    customiseMifidHeader(data,design);
+
+  }
+
+  private void customiseMifidHeader(CorporateActionElectionReportData data, JasperDesign design){
     List<String> hideColumnHeaderKeys = List.of("decisionTypeHeaderKey", "decisionMakerHeaderKey");
-    List<String> hideColumnFieldKeys = List.of("decisionTypeFieldKey", "decisionMakerFieldKey");
+    if (data.isMifidReportable()) {
+      //Fetch band
+      JRBand mifidColumnHeaderBand = design.getColumnHeader();
+      // Retrieve Mifid table header report elements from band
+      final Map<String, ReportElement> mifidTableHeaderColumns =
+          CustomiserHelper.getBandElementsByKeys(mifidColumnHeaderBand, MIFID_COLUMN_HEADER_KEYS);
+      System.out.println(mifidTableHeaderColumns.size());
+      // Get mifid table header width
+      int mifidTableHeaderWidth =
+          mifidTableHeaderColumns.values().stream().mapToInt(ReportElement::getWidth).sum();
+
+      Map<String, ReportElement> nonMifidTableHeaderColumns = new HashMap<>(mifidTableHeaderColumns);
+      hideColumnHeaderKeys.forEach(columnKey -> nonMifidTableHeaderColumns.remove(columnKey));
+      System.out.println(nonMifidTableHeaderColumns.size());
+
+      int nonMifidTableHeaderWidth =
+          nonMifidTableHeaderColumns.values().stream().mapToInt(ReportElement::getWidth).sum();
+
+      System.out.println(mifidTableHeaderWidth);
+      System.out.println(nonMifidTableHeaderWidth);
+
+      hideMifidHeaderColumns(hideColumnHeaderKeys, mifidColumnHeaderBand);
+
+      Double rebalanceFactor = (double) mifidTableHeaderWidth / nonMifidTableHeaderWidth;
+
+      nonMifidTableHeaderColumns.entrySet().stream()
+          .sorted(Map.Entry.comparingByValue(Comparator.comparing(ReportElement::getxAxis)))
+          .forEach(
+              e -> {
+                JRDesignElement designElement =
+                    CustomiserHelper.getDesignElementByKey(mifidColumnHeaderBand, e.getKey());
+                Double newWidth = (e.getValue().getWidth() * rebalanceFactor);
+                Double newX = (e.getValue().getxAxis() * rebalanceFactor);
+                designElement.setWidth((int) Math.round(newWidth));
+                designElement.setX((int) Math.round(newX));
+
+              });
+
+    }
+  }
+
+
+
+
+  public void customiseBackup(CorporateActionElectionReportData data, JasperDesign design) {
+    List<String> hideColumnHeaderKeys = List.of("decisionTypeHeaderKey", "decisionMakerHeaderKey");
+    /*List<String> hideColumnFieldKeys = List.of("decisionTypeFieldKey", "decisionMakerFieldKey");*/
     if (data.isMifidReportable()) {
       JRBand mifidColumnHeaderBand = design.getColumnHeader();
 
-      // get Mifid table header report elements
+      // Retrieve Mifid table header report elements
       Map<String, ReportElement> mifidTableHeaderColumns =
           CustomiserHelper.getBandElementsByKeys(mifidColumnHeaderBand, MIFID_COLUMN_HEADER_KEYS);
       // Get mifid table header width
       int mifidTableHeaderWidth =
           mifidTableHeaderColumns.values().stream().mapToInt(ReportElement::getWidth).sum();
+
+      //hideColumnHeaderKeys.forEach(columnKey -> mifidTableHeaderColumns.remove(columnKey));
+
 
       List<String> nonMifidColumnHeaderKeys = new ArrayList<>(MIFID_COLUMN_HEADER_KEYS);
       nonMifidColumnHeaderKeys.removeAll(hideColumnHeaderKeys);
@@ -66,8 +120,10 @@ public class SuccessfulElectionsCustomiser
       int nonMifidTableHeaderWidth =
           nonMifidTableHeaderColumns.values().stream().mapToInt(ReportElement::getWidth).sum();
 
-      hideColumnHeaderKeys.forEach(
-          entry -> CustomiserHelper.removeElementByKey(mifidColumnHeaderBand, entry));
+      System.out.println(mifidTableHeaderColumns.size());
+      System.out.println(nonMifidTableHeaderColumns.size());
+
+      hideMifidHeaderColumns(hideColumnHeaderKeys, mifidColumnHeaderBand);
 
       Double rebalanceFactor = (double) mifidTableHeaderWidth / nonMifidTableHeaderWidth;
 
@@ -75,7 +131,7 @@ public class SuccessfulElectionsCustomiser
       // mifidTableHeaderColumns.forEach((k, v) -> System.out.println(k));
       // sortMapByXAxis(mifidTableHeaderColumns).forEach((k, v) -> System.out.println(k));
 
-      mifidTableHeaderColumns.entrySet().stream()
+      nonMifidTableHeaderColumns.entrySet().stream()
           .sorted(Map.Entry.comparingByValue(Comparator.comparing(ReportElement::getxAxis)))
           .forEach(
               e -> {
@@ -88,8 +144,10 @@ public class SuccessfulElectionsCustomiser
                   Double newWidth = (e.getValue().getWidth() * rebalanceFactor);
                   System.out.println("New width: " + newWidth);
                   System.out.println("......");
-                  designElement.setWidth((int) Math.round(newWidth));
-                  designElement.setStyleNameReference("TableHeadingBlue");
+                  //designElement.setWidth((int) Math.round(newWidth));
+                  designElement.setWidth(10);
+                  //designElement.setX(5);
+                  //designElement.setStyleNameReference("TableHeadingBlue");
                 } else {
                   Double newWidth = (e.getValue().getWidth() * rebalanceFactor);
                   Double newX = (e.getValue().getxAxis() * rebalanceFactor);
@@ -121,7 +179,7 @@ public class SuccessfulElectionsCustomiser
       // Each section is made up of bands
 
       // check group name to avoid traversing other groups
-      if (design.getGroupsList().get(0).getName().equals("ReportGroup")) {
+/*      if (design.getGroupsList().get(0).getName().equals("ReportGroup")) {
         JRSection successfulElectionsSection =
             design.getGroupsList().get(0).getGroupHeaderSection();
         JRBand successfulElectionsBand = successfulElectionsSection.getBands()[0];
@@ -132,21 +190,23 @@ public class SuccessfulElectionsCustomiser
             tableFields.values().stream().mapToInt(ReportElement::getWidth).sum();
         System.out.println(tableFieldsWidth);
 
-        hideColumnFieldKeys.forEach(
-            entry -> CustomiserHelper.removeElementByKey(successfulElectionsBand, entry));
-      }
+        hideMifidHeaderColumns(hideColumnFieldKeys, successfulElectionsBand);
+      }*/
     }
   }
 
-
-
+  private void hideMifidHeaderColumns(List<String> hideColumnHeaderKeys,
+      JRBand mifidColumnHeaderBand) {
+    hideColumnHeaderKeys.forEach(
+        entry -> CustomiserHelper.hideElementByKey(mifidColumnHeaderBand, entry));
+  }
 
 
   public static Map<String, ReportElement> sortMapByXAxis(final Map<String, ReportElement> unSortedMap) {
     return unSortedMap.entrySet()
-            .stream()
-            .sorted(Map.Entry.comparingByValue(Comparator.comparing(ReportElement::getxAxis)))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        .stream()
+        .sorted(Map.Entry.comparingByValue(Comparator.comparing(ReportElement::getxAxis)))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
   }
 
 

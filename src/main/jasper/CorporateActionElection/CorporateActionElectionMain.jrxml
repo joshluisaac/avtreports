@@ -46,7 +46,7 @@
 						<subreportParameterExpression><![CDATA[$P{SUCCESSFUL_ELECTIONS}.size()]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($P{SUCCESSFUL_ELECTIONS})]]></dataSourceExpression>
-					<subreportExpression><![CDATA["CorporateActionElection/Subreports/MifidSuccessfulElections.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA["CorporateActionElection/Subreports/dummyHeader.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 			<band height="29">

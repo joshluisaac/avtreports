@@ -18,7 +18,7 @@ public class CustomiserHelper {
     return (JRDesignElement) band.getElementByKey(key);
   }
 
-  public static void removeElementByKey(JRBand band, String key) {
+  public static void hideElementByKey(JRBand band, String key) {
     JRDesignElement designElement = getDesignElementByKey(band, key);
     designElement.setPrintWhenExpression(new JRDesignExpression());
   }
