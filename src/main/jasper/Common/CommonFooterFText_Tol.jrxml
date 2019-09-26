@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- as with the individual reports, we could probably do without "Common" in the file name -->
 <!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CommonFooterFText_Tol" pageWidth="782" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="dc40bd3d-812f-44cc-b62b-dc0bc0ec958b">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -15,7 +16,7 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<pageFooter>
+	<pageFooter> <!-- misleading, this doesn't make it a footer, it's the fact that it's in the footer band of the parent report. Can we use a different band? (same for other header/footer subreports) -->
 		<band height="56" splitType="Stretch">
 			<textField isStretchWithOverflow="true" evaluationTime="Master">
 				<reportElement style="GenericFooter" positionType="Float" x="580" y="20" width="192" height="18" uuid="ccb4cffe-e18b-49d9-bb17-04a96b3770dd"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AccessSummaryMain" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="15" bottomMargin="1" uuid="765845b5-db04-43fc-ba4e-30a9ded360a5">
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AccessSummaryMain" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="15" bottomMargin="1" isSummaryWithPageHeaderAndFooter="true" uuid="765845b5-db04-43fc-ba4e-30a9ded360a5">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -16,36 +16,14 @@
 		<parameterDescription><![CDATA[Access Summary Report Title]]></parameterDescription>
 		<defaultValueExpression><![CDATA["Access Summary (" + $P{REPORT_DATA}.getSummaryType() + ") for " + $P{REPORT_DATA}.getRealUserName() + " - " + $P{REPORT_DATA}.getDatePeriod()]]></defaultValueExpression>
 	</parameter>
-	<group name="Details">
-		<groupHeader>
-			<band height="10">
-				<subreport>
-					<reportElement x="0" y="0" width="200" height="10" uuid="13723a19-d968-4460-b06f-eb8c64a8ac7b"/>
-					<subreportParameter name="reportTitle">
-						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
-					</subreportParameter>
-					<subreportExpression><![CDATA["Common/CommonTitle.jasper"]]></subreportExpression>
-				</subreport>
-			</band>
-			<band height="10">
-				<subreport>
-					<reportElement x="0" y="0" width="680" height="10" uuid="2f322da9-7830-4e8d-a80e-b93ff6c12e4b"/>
-					<subreportParameter name="REPORT_DATA">
-						<subreportParameterExpression><![CDATA[$P{REPORT_DATA}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($P{REPORT_DATA}.getAccessSummaryData())]]></dataSourceExpression>
-					<subreportExpression><![CDATA["AccessSummary/TableDetails.jasper"]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
+	<group name="Details"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="10">
+		<band height="26">
 			<subreport>
-				<reportElement x="0" y="0" width="590" height="10" uuid="69fd3064-29ff-4314-8faf-87f6739d80ff">
+				<reportElement x="0" y="0" width="590" height="20" uuid="69fd3064-29ff-4314-8faf-87f6739d80ff">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(Arrays.asList($P{REPORT_DATA}.getHeaderData()))]]></dataSourceExpression>
@@ -54,9 +32,9 @@
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="10">
+		<band height="30">
 			<subreport isUsingCache="true" runToBottom="true">
-				<reportElement x="0" y="0" width="590" height="10" uuid="7ac6aa83-1a4c-4f0a-af93-0546634dfd45">
+				<reportElement x="0" y="0" width="590" height="30" uuid="7ac6aa83-1a4c-4f0a-af93-0546634dfd45">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<subreportExpression><![CDATA["Common/CommonFooterFText_Tol.jasper"]]></subreportExpression>
@@ -64,8 +42,23 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement x="0" y="30" width="680" height="20" uuid="2f322da9-7830-4e8d-a80e-b93ff6c12e4b"/>
+				<subreportParameter name="REPORT_DATA">
+					<subreportParameterExpression><![CDATA[$P{REPORT_DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($P{REPORT_DATA}.getAccessSummaryData())]]></dataSourceExpression>
+				<subreportExpression><![CDATA["AccessSummary/TableDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="20" uuid="13723a19-d968-4460-b06f-eb8c64a8ac7b"/>
+				<subreportParameter name="reportTitle">
+					<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["Common/CommonTitle.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</summary>
 </jasperReport>

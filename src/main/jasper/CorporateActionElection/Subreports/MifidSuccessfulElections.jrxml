@@ -12,6 +12,9 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
 	<parameter name="SUCCESSFUL_ELECTIONS_SIZE" class="java.lang.Integer"/>
+	<queryString language="JSON"> <!-- I assume this can be cleaned up? -->
+		<![CDATA[Data]]>
+	</queryString>
 	<field name="adviserName" class="java.lang.String"/>
 	<field name="investorName" class="java.lang.String"/>
 	<field name="wrapperName" class="java.lang.String"/>
@@ -27,7 +30,7 @@
 		<groupHeader>
 			<band height="19">
 				<textField isStretchWithOverflow="true">
-					<reportElement key="adviserFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="14" uuid="9ae7a311-ca19-472d-9cfd-922ce4b20b7e">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="14" uuid="9ae7a311-ca19-472d-9cfd-922ce4b20b7e">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -40,7 +43,7 @@
 					<textFieldExpression><![CDATA[$F{adviserName}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="investorFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="80" y="0" width="80" height="14" uuid="5dcaa9b4-f039-4119-8b8d-072f6b5a9e61">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="80" y="0" width="80" height="14" uuid="5dcaa9b4-f039-4119-8b8d-072f6b5a9e61">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -53,7 +56,7 @@
 					<textFieldExpression><![CDATA[$F{investorName}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="wrapperFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="160" y="0" width="80" height="14" uuid="695473ab-c9e0-4de5-ba6f-c7a8e357b691">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="160" y="0" width="80" height="14" uuid="695473ab-c9e0-4de5-ba6f-c7a8e357b691">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -66,7 +69,7 @@
 					<textFieldExpression><![CDATA[$F{wrapperName}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="electedProductFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="240" y="0" width="110" height="14" uuid="17ad7efd-4245-4b69-b029-a176c13386f9">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="240" y="0" width="110" height="14" uuid="17ad7efd-4245-4b69-b029-a176c13386f9">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -79,7 +82,7 @@
 					<textFieldExpression><![CDATA[$F{electedProduct}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="decisionTypeFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="410" y="0" width="70" height="14" uuid="b265f5db-54a9-494b-865b-b521cc865599">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="410" y="0" width="70" height="14" uuid="b265f5db-54a9-494b-865b-b521cc865599">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -92,7 +95,7 @@
 					<textFieldExpression><![CDATA[$F{decisionTypeDescription}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.0000;">
-					<reportElement key="previouslyElectedUnitsFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="570" y="0" width="70" height="14" uuid="b7a13553-89ed-4632-8863-6bab259cc250">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="570" y="0" width="70" height="14" uuid="b7a13553-89ed-4632-8863-6bab259cc250">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -105,7 +108,7 @@
 					<textFieldExpression><![CDATA[$F{origUnits}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.0000;">
-					<reportElement key="newlyElectedUnitsFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="640" y="0" width="70" height="14" uuid="c1528e3d-378a-4420-9989-e7801756286e">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="640" y="0" width="70" height="14" uuid="c1528e3d-378a-4420-9989-e7801756286e">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -118,7 +121,7 @@
 					<textFieldExpression><![CDATA[$F{newUnits}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00%">
-					<reportElement key="newlyElectedPercentageFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="710" y="0" width="70" height="14" uuid="46ece30d-db1a-4c20-9dc3-d6c6665ad770">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="710" y="0" width="70" height="14" uuid="46ece30d-db1a-4c20-9dc3-d6c6665ad770">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -132,7 +135,7 @@
 					<textFieldExpression><![CDATA[$F{electedPercentage}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="isinFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="350" y="0" width="60" height="14" uuid="64e60053-2294-45a2-b563-daa2fad63b56">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="350" y="0" width="60" height="14" uuid="64e60053-2294-45a2-b563-daa2fad63b56">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -145,7 +148,7 @@
 					<textFieldExpression><![CDATA[$F{isin}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement key="decisionMakerFieldKey" style="TableDataMedium" positionType="Float" stretchType="RelativeToBandHeight" x="480" y="0" width="90" height="14" uuid="ad72b125-5b23-4685-925c-3b1b019cbe7d">
+					<reportElement key="" style="TableDataMedium" stretchType="RelativeToBandHeight" x="480" y="0" width="90" height="14" uuid="ad72b125-5b23-4685-925c-3b1b019cbe7d">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box padding="4">
@@ -174,51 +177,50 @@
 	<columnHeader>
 		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement key="adviserHeaderKey" style="TableHeadingBlue" positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="80" height="28" uuid="422ac899-5106-4a5e-9f1a-f0acd5a278eb">
+				<reportElement style="TableHeadingBlue" x="0" y="0" width="80" height="28" uuid="422ac899-5106-4a5e-9f1a-f0acd5a278eb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Adviser]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="investorHeaderKey" style="TableHeadingBlue" positionType="Float" x="80" y="0" width="80" height="28" uuid="6348c9ff-3c89-4b70-9fe5-9dfdf894f31a">
+				<reportElement style="TableHeadingBlue" x="80" y="0" width="80" height="28" uuid="6348c9ff-3c89-4b70-9fe5-9dfdf894f31a">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Investor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="wrapperHeaderKey" style="TableHeadingBlue" x="160" y="0" width="80" height="28" uuid="bb83a150-94e0-4e01-8755-86e4236b1d74">
+				<reportElement style="TableHeadingBlue" x="160" y="0" width="80" height="28" uuid="bb83a150-94e0-4e01-8755-86e4236b1d74">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Wrapper]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="electedProductHeaderKey" style="TableHeadingBlue" x="240" y="0" width="110" height="28" uuid="aedc0100-5be0-4a22-a09d-10a0c69ae36f">
+				<reportElement style="TableHeadingBlue" x="240" y="0" width="110" height="28" uuid="aedc0100-5be0-4a22-a09d-10a0c69ae36f">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Elected Product]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="decisionTypeHeaderKey" style="TableHeadingBlue" x="410" y="0" width="70" height="28" uuid="981403df-560b-49c9-a2fb-abfbee73c3a1">
+				<reportElement style="TableHeadingBlue" x="410" y="0" width="70" height="28" uuid="981403df-560b-49c9-a2fb-abfbee73c3a1">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[Discretionary or Advisory]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="previouslyElectedUnitsHeaderKey" style="TableHeadingBlue" x="570" y="0" width="70" height="28" uuid="b0d6df60-ffea-44b0-8dcd-e27d2b2e0106">
+				<reportElement style="TableHeadingBlue" x="570" y="0" width="70" height="28" uuid="b0d6df60-ffea-44b0-8dcd-e27d2b2e0106">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Previously Elected Units]]></text>
+				<text><![CDATA[Previosuly Elected Units]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="newlyElectedUnitsHeaderKey" style="TableHeadingBlue" x="640" y="0" width="70" height="28" uuid="4a00ff49-f71a-4b21-aea7-03601457b460">
+				<reportElement style="TableHeadingBlue" x="640" y="0" width="70" height="28" uuid="4a00ff49-f71a-4b21-aea7-03601457b460">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -226,7 +228,7 @@
 				<text><![CDATA[Newly Elected Units]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="newlyElectedPercentageHeaderKey" style="TableHeadingBlue" x="710" y="0" width="70" height="28" uuid="b83dbee4-85fa-4104-88b6-bb2ba84ef527">
+				<reportElement style="TableHeadingBlue" x="710" y="0" width="70" height="28" uuid="b83dbee4-85fa-4104-88b6-bb2ba84ef527">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -234,14 +236,14 @@
 				<text><![CDATA[Newly Elected Percentage]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="isinHeaderKey" style="TableHeadingBlue" x="350" y="0" width="60" height="28" uuid="6068ed96-750c-483e-abdb-27d350a9dfcf">
+				<reportElement style="TableHeadingBlue" x="350" y="0" width="60" height="28" uuid="6068ed96-750c-483e-abdb-27d350a9dfcf">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<text><![CDATA[ISIN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="decisionMakerHeaderKey" style="TableHeadingBlue" x="480" y="0" width="90" height="28" uuid="8ab65ca8-ceca-4805-a22a-aac4c7e72344">
+				<reportElement style="TableHeadingBlue" x="480" y="0" width="90" height="28" uuid="8ab65ca8-ceca-4805-a22a-aac4c7e72344">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
