@@ -7,61 +7,6 @@
 	<field name="accessed" class="java.lang.String"/>
 	<field name="eventDateTime" class="java.lang.String"/>
 	<field name="eventDisplayMessage" class="java.lang.String"/>
-	<group name="ReportGroup" minHeightToStartNewPage="42" keepTogether="true">
-		<groupExpression><![CDATA[$F{loggedInAs} + $F{accessed} + $F{eventDateTime} + $F{eventDisplayMessage}]]></groupExpression>
-		<groupHeader>
-			<band height="17">
-				<textField isStretchWithOverflow="true">
-					<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="325" y="3" width="113" height="14" isPrintWhenDetailOverflows="true" uuid="ae41e9bb-e6bd-4bd6-a24b-5aeba46effd3">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy hh:mm a").format((Date) new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse($F{eventDateTime}))]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="440" y="3" width="242" height="14" isPrintWhenDetailOverflows="true" uuid="36c4e244-7c76-4129-b976-baba042172c0"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement verticalAlignment="Middle" markup="styled"/>
-					<textFieldExpression><![CDATA[$F{eventDisplayMessage}.replaceAll("&reg;","®")]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="TableDataMedium" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="163" y="3" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="1047e6ea-e6a7-4962-96fe-cd15587607a8"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement verticalAlignment="Middle" markup="styled"/>
-					<textFieldExpression><![CDATA[$F{accessed}.replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement key="" style="TableDataMedium" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="0" y="3" width="161" height="14" uuid="9ae7a311-ca19-472d-9cfd-922ce4b20b7e">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement verticalAlignment="Middle" markup="styled"/>
-					<textFieldExpression><![CDATA[$F{loggedInAs}.replaceAll("&","&amp;").replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
 	<columnHeader>
 		<band height="14" splitType="Stretch">
 			<staticText>
@@ -90,4 +35,56 @@
 			</staticText>
 		</band>
 	</columnHeader>
+	<detail>
+		<band height="19">
+			<textField isStretchWithOverflow="true">
+				<reportElement key="" style="TableDataMedium" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="0" y="3" width="161" height="14" uuid="9ae7a311-ca19-472d-9cfd-922ce4b20b7e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{loggedInAs}.replaceAll("&","&amp;").replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="TableDataMedium" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="163" y="3" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="1047e6ea-e6a7-4962-96fe-cd15587607a8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{accessed}.replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="325" y="3" width="113" height="14" isPrintWhenDetailOverflows="true" uuid="ae41e9bb-e6bd-4bd6-a24b-5aeba46effd3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy hh:mm a").format((Date) new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse($F{eventDateTime}))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="440" y="3" width="242" height="14" isPrintWhenDetailOverflows="true" uuid="36c4e244-7c76-4129-b976-baba042172c0"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{eventDisplayMessage}.replaceAll("&reg;","®")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
 </jasperReport>
