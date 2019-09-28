@@ -21,10 +21,10 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="26">
+		<band height="22">
 			<subreport>
 				<reportElement x="0" y="0" width="590" height="20" uuid="69fd3064-29ff-4314-8faf-87f6739d80ff">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(Arrays.asList($P{REPORT_DATA}.getHeaderData()))]]></dataSourceExpression>
 				<subreportExpression><![CDATA["Common/Header.jasper"]]></subreportExpression>
@@ -32,10 +32,11 @@
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="30">
-			<subreport isUsingCache="true" runToBottom="true">
-				<reportElement x="0" y="0" width="590" height="30" uuid="7ac6aa83-1a4c-4f0a-af93-0546634dfd45">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		<band height="21">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport isUsingCache="true" runToBottom="true" overflowType="NoStretch">
+				<reportElement x="0" y="0" width="590" height="21" uuid="7ac6aa83-1a4c-4f0a-af93-0546634dfd45">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<subreportExpression><![CDATA["Common/FooterFText_Tol.jasper"]]></subreportExpression>
 			</subreport>
@@ -45,7 +46,9 @@
 		<band height="50" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement x="0" y="30" width="680" height="20" uuid="2f322da9-7830-4e8d-a80e-b93ff6c12e4b"/>
+				<reportElement x="0" y="25" width="680" height="25" uuid="2f322da9-7830-4e8d-a80e-b93ff6c12e4b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<subreportParameter name="REPORT_DATA">
 					<subreportParameterExpression><![CDATA[$P{REPORT_DATA}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -53,7 +56,9 @@
 				<subreportExpression><![CDATA["AccessSummary/TableDetails.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="0" y="0" width="200" height="20" uuid="13723a19-d968-4460-b06f-eb8c64a8ac7b"/>
+				<reportElement x="0" y="0" width="200" height="25" uuid="13723a19-d968-4460-b06f-eb8c64a8ac7b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<subreportParameter name="reportTitle">
 					<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
 				</subreportParameter>
