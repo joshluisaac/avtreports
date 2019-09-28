@@ -15,8 +15,7 @@ public class JasperReportSupplierTest {
   @Rule public ExpectedException expectedExpThrown = ExpectedException.none();
   private static final String REPORT_ID_NOT_EXIST = "TestReport1/thisReportDoesNotExist.jasper";
   private static final String REPORT_ID = "TestReport2/TestReport2_ForTestPurposes.jasper";
-  private static final String COMMON_REPORT_ID =
-      "TestReportCommon/CommonReport_ForTestPurposes.jasper";
+  private static final String COMMON_REPORT_ID = "TestReportCommon/CommonReport_ForTestPurposes.jasper";
   private List<String> allowedReportDirs;
 
   @Before
