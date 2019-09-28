@@ -6,7 +6,7 @@
 	<field name="headerText" class="java.lang.String"/>
 	<field name="headerImage" class="java.awt.Image"/>
 	<title>
-		<band height="77" splitType="Stretch">
+		<band height="77" splitType="Prevent">
 			<image scaleImage="RetainShape" hAlign="Right">
 				<reportElement x="632" y="0" width="150" height="70" uuid="8c25776b-8a7b-4229-8865-21770a74e38a">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
