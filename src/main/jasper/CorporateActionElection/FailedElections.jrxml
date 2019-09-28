@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- not much use having a "Subreports" directory, it will always include nearly everything... -->
-<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FailedElections" pageWidth="782" pageHeight="575" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -12,7 +11,7 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
-	<parameter name="FAILED_ELECTIONS_SIZE" class="java.lang.Integer"/> <!-- why pass in size? can't we get it from the datasource? -->
+	<parameter name="FAILED_ELECTIONS_SIZE" class="java.lang.Integer"/>
 	<field name="adviserName" class="java.lang.String"/>
 	<field name="investorName" class="java.lang.String"/>
 	<field name="wrapperName" class="java.lang.String"/>
@@ -26,8 +25,7 @@
 		<groupExpression><![CDATA[$F{adviserName} + $F{investorName} + $F{wrapperName} + $F{electedProduct}]]></groupExpression>
 		<groupHeader>
 			<band height="14">
-				<!-- why wrap and then unwrap the primitive boolean? -->
-				<printWhenExpression><![CDATA[new Boolean( $P{FAILED_ELECTIONS_SIZE}.intValue() > 0 ).booleanValue()]]></printWhenExpression>
+				<printWhenExpression><![CDATA[$P{FAILED_ELECTIONS_SIZE} > 0]]></printWhenExpression>
 				<textField isStretchWithOverflow="true">
 					<reportElement key="" style="TableDataMedium" stretchType="ContainerHeight" x="0" y="0" width="85" height="14" uuid="9ae7a311-ca19-472d-9cfd-922ce4b20b7e">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -137,7 +135,7 @@
 		</groupHeader>
 	</group>
 	<title>
-		<band height="34" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Heading3" positionType="Float" x="0" y="20" width="682" height="14" uuid="60dde7f8-0c5d-4c4e-90cf-5baf4f268d94">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -149,7 +147,7 @@
 	</title>
 	<columnHeader>
 		<band height="28" splitType="Prevent">
-			<printWhenExpression><![CDATA[new Boolean( $P{FAILED_ELECTIONS_SIZE}.intValue() > 0 ).booleanValue()]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$P{FAILED_ELECTIONS_SIZE} > 0]]></printWhenExpression>
 			<staticText>
 				<reportElement style="TableHeadingBlue" x="0" y="0" width="85" height="28" uuid="422ac899-5106-4a5e-9f1a-f0acd5a278eb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>

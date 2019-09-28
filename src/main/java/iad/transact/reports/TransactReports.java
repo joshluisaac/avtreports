@@ -13,7 +13,7 @@ public final class TransactReports {
       new TransactReportGenerator<>("AccessSummary", null);
 
   public static final ReportGenerator<CorporateActionElectionReportData> CORPORATE_ACTION_ELECTION =
-      new TransactReportGenerator<>("CorporateActionElection", Map.of("CorporateActionElection/Subreports/dummyHeader.jasper", new SuccessfulElectionsCustomiser()));
+      new TransactReportGenerator<>("CorporateActionElection", null);
 
   private TransactReports() {}
 }
