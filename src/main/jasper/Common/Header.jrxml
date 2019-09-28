@@ -5,10 +5,10 @@
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
 	<field name="headerText" class="java.lang.String"/>
 	<field name="headerImage" class="java.awt.Image"/>
-	<title>
-		<band height="77" splitType="Prevent">
-			<image scaleImage="RetainShape" hAlign="Right">
-				<reportElement x="632" y="0" width="150" height="70" uuid="8c25776b-8a7b-4229-8865-21770a74e38a">
+	<summary>
+		<band height="21" splitType="Prevent">
+			<image scaleImage="RealHeight" hAlign="Right">
+				<reportElement x="632" y="0" width="150" height="20" uuid="8c25776b-8a7b-4229-8865-21770a74e38a">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<imageExpression><![CDATA[$F{headerImage} != null ? $F{headerImage} : "common/Graphics/Headers/Transact_Header2_PDF.gif"]]></imageExpression>
@@ -19,5 +19,5 @@
 				<textFieldExpression><![CDATA[$F{headerText}]]></textFieldExpression>
 			</textField>
 		</band>
-	</title>
+	</summary>
 </jasperReport>
