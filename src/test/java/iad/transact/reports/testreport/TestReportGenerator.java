@@ -23,11 +23,11 @@ public class TestReportGenerator {
 
   @Before
   public void beforeTestReportGenerator() {
-    reportName = "TestReport1";
+    reportName = "TestBasicReport";
     TestReportEntry row1 =
-        new TestReportEntry("TestNameA", "TestNameA@mail.com", new BigDecimal("120.48"));
+        new TestReportEntry("TestNameA", "TestNameA@mail.com", new BigDecimal("120.48"),"04-901-765");
     TestReportEntry row2 =
-        new TestReportEntry("TestNameB", "TestNameB@mail.com", new BigDecimal("190.07"));
+        new TestReportEntry("TestNameB", "TestNameB@mail.com", new BigDecimal("190.07"),"04-900-765");
     testReportFakeData = new TestReportFakeData(List.of(row1, row2));
     reportGenerator = new TransactReportGenerator<>(reportName, null);
   }

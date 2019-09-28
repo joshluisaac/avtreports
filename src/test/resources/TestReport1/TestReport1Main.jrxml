@@ -3,8 +3,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestReport1Main" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c74a32e3-aa20-4849-91d5-18b828819cba">
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="REPORT_DATA" class="iad.transact.reports.testreport.TestReportFakeData"/>
-	<group name="Group1">
-		<groupHeader>
+
+		<summary>
 			<band height="34">
 				<subreport>
 					<reportElement x="0" y="0" width="730" height="30" uuid="b046f7b0-c4e8-4ede-b3ad-1f474f3041ac"/>
@@ -12,9 +12,7 @@
 					<subreportExpression><![CDATA["TestReport1/TestReport1_SubReport.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
-		</groupHeader>
-	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+		</summary>
+
+
 </jasperReport>
