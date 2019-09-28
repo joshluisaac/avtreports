@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TableDetails" pageWidth="782" pageHeight="545" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="682" leftMargin="50" rightMargin="50" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.callouts" value="callouts.1.fg=0,0,0\ncallouts.1.text=eventDateTime should be localdate and not string\ncallouts.1.bounds=50,190,198,198\ncallouts.1.bg=255,255,0\n"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
 	<field name="loggedInAs" class="java.lang.String"/>
 	<field name="accessed" class="java.lang.String"/>
