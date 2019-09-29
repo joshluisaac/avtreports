@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import lombok.SneakyThrows;
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class TestReportGenerator {
     TestReportEntry row2 =
         new TestReportEntry("TestNameB", "TestNameB@mail.com", new BigDecimal("190.07"),"04-900-765");
     testReportFakeData = new TestReportFakeData(List.of(row1, row2));
-    reportGenerator = new TransactReportGenerator<>(reportName, null);
+    reportGenerator = new TransactReportGenerator<>(reportName, Map.of("", new TestReportCustomiser()));
   }
 
   @Test @SneakyThrows
