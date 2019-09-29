@@ -1,10 +1,9 @@
 package iad.reports;
 
 import iad.transact.reports.corporateactionelection.ReportElement;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRElement;
 import net.sf.jasperreports.engine.JRElementGroup;
@@ -50,9 +49,9 @@ public class CustomiserHelper {
 
 
     // iterates over the keys to build report elements
-    public static Map<String, JRElement> getBandElementsByKeys2(
+    public static List<JRElement> getBandElementsByKeys2(
             JRElementGroup band, Iterable<String> keys) {
-        Map<String, JRElement> reportElements = new HashMap<>();
+        List<JRElement> reportElements = new ArrayList<>();
         keys.forEach(
                 key -> {
                     JRElement bandElement = band.getElementByKey(key);
@@ -60,7 +59,7 @@ public class CustomiserHelper {
                         throw new IllegalArgumentException(
                                 String.format("The requested key (%s) does not exists within the report.", key));
                     }
-                    reportElements.put(bandElement.getKey(), bandElement);
+                    reportElements.add(bandElement);
                 });
         return reportElements;
     }
