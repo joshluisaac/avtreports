@@ -42,11 +42,11 @@ public class TestReportCustomiser implements Customiser<TestReportFakeData> {
         //CustomiserHelper.updateElement(nonMifidTableElements, rebalanceFactor);
 
 
-        rebalanceColumns(columnHeaderBand,MIFID_COLUMN_KEYS, columnKeys);
-        rebalanceColumns(detailBand,MIFID_FIELD_KEYS,fieldKeys);
+        rebalanceElements(columnHeaderBand,MIFID_COLUMN_KEYS, columnKeys);
+        rebalanceElements(detailBand,MIFID_FIELD_KEYS,fieldKeys);
     }
 
-    private void rebalanceColumns(JRBand band, List<String> excludeKeys, List<String> elementKeys){
+    private void rebalanceElements(JRBand band, List<String> excludeKeys, List<String> elementKeys){
         List<JRElement> bandElements = CustomiserHelper.getBandElementsByKeys(band, elementKeys);
         int tableHeaderWidth = bandElements.stream().mapToInt(JRElement::getWidth).sum();
         List<JRElement> nonMifidTableElements = getNonMifidTableElements(excludeKeys,bandElements);
