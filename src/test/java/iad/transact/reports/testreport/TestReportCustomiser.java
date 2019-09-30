@@ -20,6 +20,9 @@ public class TestReportCustomiser implements Customiser<TestReportFakeData> {
                     ,new ColumnFieldPair("phoneNumberColumnKey","phoneNumberFieldKey")
     );
 
+    private static final List<String> MIFID_COLUMN_KEYS = List.of("osBalColumnKey", "currentDateColumnKey");
+    private static final List<String> MIFID_FIELD_KEYS = List.of("osBalFieldKey", "currentDateFieldKey");
+
 
     @Override
     public void customise(TestReportFakeData data, JasperDesign design) {
@@ -29,25 +32,40 @@ public class TestReportCustomiser implements Customiser<TestReportFakeData> {
         COLUMN_FIELD_PAIRS.forEach(key -> columnKeys.add(key.getColumnKey()));
         List<String> fieldKeys = new ArrayList<>();
         COLUMN_FIELD_PAIRS.forEach(key -> fieldKeys.add(key.getFieldKey()));
-        customise(columnHeaderBand,List.of("osBalColumnKey", "currentDateColumnKey"), columnKeys);
-        customise(detailBand,List.of("osBalFieldKey", "currentDateFieldKey"),fieldKeys);
+
+        //List<JRElement> bandElements = CustomiserHelper.getBandElementsByKeys(columnHeaderBand, columnKeys);
+        //int tableHeaderWidth = bandElements.stream().mapToInt(JRElement::getWidth).sum();
+        //List<JRElement> nonMifidTableElements = getNonMifidTableElements(MIFID_COLUMN_KEYS,bandElements);
+        //int nonMifidTableHeaderWidth = nonMifidTableElements.stream().mapToInt(JRElement::getWidth).sum();
+        //double rebalanceFactor = (double) tableHeaderWidth / nonMifidTableHeaderWidth;
+        //CustomiserHelper.hideElements(MIFID_COLUMN_KEYS, columnHeaderBand);
+        //CustomiserHelper.updateElement(nonMifidTableElements, rebalanceFactor);
+
+
+        rebalanceColumns(columnHeaderBand,MIFID_COLUMN_KEYS, columnKeys);
+        rebalanceColumns(detailBand,MIFID_FIELD_KEYS,fieldKeys);
     }
 
-    private void customise(JRBand band, List<String> excludeKeys, List<String> elementKeys){
-        List<JRElement> tableHeaderColumns = CustomiserHelper.getBandElementsByKeys2(band, elementKeys);
-        int tableHeaderWidth = tableHeaderColumns.stream().mapToInt(JRElement::getWidth).sum();
-        List<JRElement> nonMifidTableHeaderColumns = new ArrayList<>(tableHeaderColumns);
-        Iterator<JRElement> itr = nonMifidTableHeaderColumns.iterator();
+    private void rebalanceColumns(JRBand band, List<String> excludeKeys, List<String> elementKeys){
+        List<JRElement> bandElements = CustomiserHelper.getBandElementsByKeys(band, elementKeys);
+        int tableHeaderWidth = bandElements.stream().mapToInt(JRElement::getWidth).sum();
+        List<JRElement> nonMifidTableElements = getNonMifidTableElements(excludeKeys,bandElements);
+        int nonMifidTableHeaderWidth = nonMifidTableElements.stream().mapToInt(JRElement::getWidth).sum();
+        double rebalanceFactor = (double) tableHeaderWidth / nonMifidTableHeaderWidth;
+        CustomiserHelper.hideElements(excludeKeys, band);
+        CustomiserHelper.updateElement(nonMifidTableElements, rebalanceFactor);
+    }
+
+    private List<JRElement> getNonMifidTableElements(List<String> excludeKeys,List<JRElement> bandElements){
+        List<JRElement> nonMifidTableElements = new ArrayList<>(bandElements);
+        Iterator<JRElement> itr = nonMifidTableElements.iterator();
         while(itr.hasNext()) {
             JRElement nextElement = itr.next();
             if (excludeKeys.contains(nextElement.getKey())) {
                 itr.remove();
             }
         }
-        int nonMifidTableHeaderWidth = nonMifidTableHeaderColumns.stream().mapToInt(JRElement::getWidth).sum();
-        double rebalanceFactor = (double) tableHeaderWidth / nonMifidTableHeaderWidth;
-        CustomiserHelper.hideElements(excludeKeys, band);
-        CustomiserHelper.rebalanceColumn(nonMifidTableHeaderColumns, rebalanceFactor);
+        return nonMifidTableElements;
     }
 
 

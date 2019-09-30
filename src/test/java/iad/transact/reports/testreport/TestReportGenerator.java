@@ -33,13 +33,13 @@ public class TestReportGenerator {
     reportGenerator = new TransactReportGenerator<>(reportName, Map.of("TestBasicReport/TestReportDetails.jasper", new TestReportCustomiser()));
   }
 
-  @SneakyThrows
+  @Test @SneakyThrows
   public void testShouldGeneratePdfAsStream() {
     InputStream inputStream = reportGenerator.generatePdf(testReportFakeData);
     Assert.assertTrue(inputStream.readAllBytes().length > 0);
   }
 
-  //@Test
+  @Test
   public void testShouldGeneratePdfAsByteArrayOutputStream() {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     reportGenerator.generatePdf(testReportFakeData, outputStream);

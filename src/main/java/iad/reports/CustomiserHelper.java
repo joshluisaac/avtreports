@@ -26,7 +26,7 @@ public class CustomiserHelper {
   }
 
   // iterates over the keys to build report elements
-  public static Map<String, ReportElement> getBandElementsByKeys(
+  public static Map<String, ReportElement> getBandElementsByKeys2(
       JRElementGroup band, Iterable<String> keys) {
     Map<String, ReportElement> reportElements = new HashMap<>();
     keys.forEach(
@@ -50,7 +50,7 @@ public class CustomiserHelper {
 
 
     // iterates over the keys to build report elements
-    public static List<JRElement> getBandElementsByKeys2(
+    public static List<JRElement> getBandElementsByKeys(
             JRElementGroup band, Iterable<String> keys) {
         List<JRElement> reportElements = new ArrayList<>();
         keys.forEach(
@@ -65,7 +65,7 @@ public class CustomiserHelper {
         return reportElements;
     }
 
-    public static void rebalanceColumn(List<JRElement> columnElements, double rebalanceFactor) {
+    public static void updateElement(List<JRElement> columnElements, double rebalanceFactor) {
         Integer[] totalWidth = { 0 };
         IntStream.range(0, columnElements.size())
                 .forEach(
