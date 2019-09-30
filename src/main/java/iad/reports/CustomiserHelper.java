@@ -3,6 +3,7 @@ package iad.reports;
 import iad.transact.reports.corporateactionelection.ReportElement;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRElement;
@@ -62,6 +63,27 @@ public class CustomiserHelper {
                     reportElements.add(bandElement);
                 });
         return reportElements;
+    }
+
+    public static void rebalanceColumn(List<JRElement> columnElements, double rebalanceFactor) {
+        Integer[] totalWidth = { 0 };
+        IntStream.range(0, columnElements.size())
+                .forEach(
+                        index -> {
+                            JRElement column = columnElements.get(index);
+                            double newWidth = (column.getWidth() * rebalanceFactor);
+                            if (index == 0) {
+                                column.setWidth((int) Math.round(newWidth));
+                            } else {
+                                column.setX(totalWidth[0]);
+                                column.setWidth((int) Math.round(newWidth));
+                            }
+                            totalWidth[0] = totalWidth[0] + (int) Math.round(newWidth);
+                        });
+    }
+
+    public static void hideElements(List<String> keys, JRBand band) {
+      keys.forEach(entry -> CustomiserHelper.hideElementByKey(band, entry));
     }
 
 
