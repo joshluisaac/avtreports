@@ -78,6 +78,7 @@ public class CustomiserHelper {
     int finalTableWidth = finalBandElements.stream().mapToInt(JRElement::getWidth).sum();
     // Precision fear: Not sure about this double though,int should work.
     double rebalanceFactor = (double) initialTableWidth / finalTableWidth;
+    System.out.println("Resizing by: " + String.format("%.2f", ((rebalanceFactor - 1) * 100)) + "%");
     CustomiserHelper.hideElements(excludeKeys, band);
     CustomiserHelper.resizeElements(xCoOrdStartsAt,finalBandElements, rebalanceFactor);
   }
