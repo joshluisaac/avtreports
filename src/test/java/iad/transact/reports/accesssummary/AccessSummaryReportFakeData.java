@@ -32,11 +32,11 @@ public class AccessSummaryReportFakeData {
 
   @SneakyThrows
   private static HeaderData getHeaderData(String graphicContent, String brandingHeaderText) {
-    return new HeaderData.Builder()
-        .setHeaderImage(
-            ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(graphicContent))))
-        .setHeaderText(brandingHeaderText)
-        .build();
+    return HeaderData
+            .builder()
+            .headerImage (ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(graphicContent))))
+            .headerText(brandingHeaderText)
+            .build();
   }
 
   public static AccessSummaryReportData buildReportData() {
