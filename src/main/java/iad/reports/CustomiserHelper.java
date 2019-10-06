@@ -2,6 +2,7 @@ package iad.reports;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import net.sf.jasperreports.engine.JRBand;
@@ -77,30 +78,29 @@ public class CustomiserHelper {
     List<String> elementKeys;
     List<String> excludedKeys;
     if (columnType.getType().equals("H")) {
-      excludedKeys =
-          columnHeaderFieldPairs.stream()
-              .filter(ColumnHeaderFieldPair::isExcluded)
-              .map(ColumnHeaderFieldPair::getColumnKey)
-              .collect(Collectors.toList());
-      elementKeys =
-          columnHeaderFieldPairs.stream()
-              .map(ColumnHeaderFieldPair::getColumnKey)
-              .collect(Collectors.toList());
+      excludedKeys = getExcludedKeys(columnHeaderFieldPairs, ColumnHeaderFieldPair::getColumnKey);
+      elementKeys = getElementKeys(columnHeaderFieldPairs,ColumnHeaderFieldPair::getColumnKey);
     } else if (columnType.getType().equals("FD")) {
-      excludedKeys =
-          columnHeaderFieldPairs.stream()
-              .filter(ColumnHeaderFieldPair::isExcluded)
-              .map(ColumnHeaderFieldPair::getFieldKey)
-              .collect(Collectors.toList());
-      elementKeys =
-          columnHeaderFieldPairs.stream()
-              .map(ColumnHeaderFieldPair::getFieldKey)
-              .collect(Collectors.toList());
+      excludedKeys = getExcludedKeys(columnHeaderFieldPairs, ColumnHeaderFieldPair::getFieldKey);
+      elementKeys = getElementKeys(columnHeaderFieldPairs,ColumnHeaderFieldPair::getFieldKey);
     } else {
       throw new IllegalArgumentException(
           String.format("The specified column type (%s) isn't supported.", columnType.getType()));
     }
     rebalance(band, excludedKeys, elementKeys);
+  }
+
+  private static List<String> getExcludedKeys(Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs, Function<ColumnHeaderFieldPair, String> mapFunc){
+    return columnHeaderFieldPairs.stream()
+            .filter(ColumnHeaderFieldPair::isExcluded)
+            .map(mapFunc)
+            .collect(Collectors.toList());
+  }
+
+  private static List<String> getElementKeys(Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs, Function<ColumnHeaderFieldPair, String> mapFunc){
+    return columnHeaderFieldPairs.stream()
+                    .map(mapFunc)
+                    .collect(Collectors.toList());
   }
 
   public static JRDesignElement getDesignElementByKey(JRElementGroup band, String key) {
