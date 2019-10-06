@@ -15,17 +15,29 @@ public class CustomiserHelper {
 
   private CustomiserHelper() {}
 
-  public static List<JRElement> getBandElementsByKeys(JRElementGroup band, Iterable<String> keys) {
+  public static List<JRElement> getBandElementsByKeys(JRElementGroup band, Collection<String> keys) {
+    return keys.stream().map(key -> {
+      JRElement bandElement = band.getElementByKey(key);
+      if (bandElement == null) {
+        throw new IllegalArgumentException(
+                String.format("The requested key (%s) does not exists within the report.", key));
+      }
+      return bandElement;
+    }).collect(Collectors.toList());
+  }
+
+
+  public static List<JRElement> getBandElementsByKeysOld(JRElementGroup band, Collection<String> keys) {
     List<JRElement> reportElements = new ArrayList<>();
     keys.forEach(
-        key -> {
-          JRElement bandElement = band.getElementByKey(key);
-          if (bandElement == null) {
-            throw new IllegalArgumentException(
-                String.format("The requested key (%s) does not exists within the report.", key));
-          }
-          reportElements.add(bandElement);
-        });
+            key -> {
+              JRElement bandElement = band.getElementByKey(key);
+              if (bandElement == null) {
+                throw new IllegalArgumentException(
+                        String.format("The requested key (%s) does not exists within the report.", key));
+              }
+              reportElements.add(bandElement);
+            });
     return reportElements;
   }
 
