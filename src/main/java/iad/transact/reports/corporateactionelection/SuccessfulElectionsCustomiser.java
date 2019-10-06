@@ -4,6 +4,8 @@ import iad.reports.ColumnHeaderFieldPair;
 import iad.reports.ColumnType;
 import iad.reports.Customiser;
 import iad.reports.CustomiserHelper;
+
+import java.time.Instant;
 import java.util.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -32,10 +34,12 @@ public class SuccessfulElectionsCustomiser
   @Override
   public void customise(CorporateActionElectionReportData data, JasperDesign design) {
     if (!data.isMifidReportable()) {
+      long start = System.currentTimeMillis();
       JRBand columnHeaderBand = design.getColumnHeader();
       JRBand detailBand = design.getDetailSection().getBands()[0];
       CustomiserHelper.rebalance(columnHeaderBand, COLUMN_FIELD_PAIRS, ColumnType.HEADER);
       CustomiserHelper.rebalance(detailBand, COLUMN_FIELD_PAIRS, ColumnType.DETAIL);
+      System.out.println(System.currentTimeMillis() - start);
 
       //CustomiserHelper.rebalance(0,columnHeaderBand, COLUMN_FIELD_PAIRS, ColumnType.HEADER);
       //CustomiserHelper.rebalance(0, detailBand, COLUMN_FIELD_PAIRS, ColumnType.DETAIL);
