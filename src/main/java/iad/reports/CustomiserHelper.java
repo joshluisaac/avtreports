@@ -41,20 +41,23 @@ public class CustomiserHelper {
     return reportElements;
   }
 
-  public static void resizeElements(List<JRElement> bandElements, double rebalanceFactor) {
+  public static void resizeElements(Integer xCoOrdStartsAt, List<JRElement> bandElements, double rebalanceFactor) {
     AtomicInteger totalWidth = new AtomicInteger(0);
     IntStream.range(0, bandElements.size())
         .forEach(
             index -> {
               JRElement column = bandElements.get(index);
-              double newWidth = (column.getWidth() * rebalanceFactor);
+              int newWidth =(int)  Math.round((column.getWidth() * rebalanceFactor));
               if (index == 0) {
-                column.setWidth((int) Math.round(newWidth));
+                if (xCoOrdStartsAt != null){
+                  column.setX(xCoOrdStartsAt);
+                }
+                column.setWidth(newWidth);
               } else {
                 column.setX(totalWidth.get());
-                column.setWidth((int) Math.round(newWidth));
+                column.setWidth(newWidth);
               }
-              totalWidth.set(totalWidth.get() + (int) Math.round(newWidth));
+              totalWidth.set(totalWidth.get() + newWidth);
             });
   }
 
@@ -68,7 +71,7 @@ public class CustomiserHelper {
     return elements;
   }
 
-  private static void rebalance(JRBand band, List<String> excludeKeys, List<String> elementKeys) {
+  private static void rebalance(Integer xCoOrdStartsAt, JRBand band, List<String> excludeKeys, List<String> elementKeys) {
     List<JRElement> initialBandElements = CustomiserHelper.getBandElementsByKeys(band, elementKeys);
     int initialTableWidth = initialBandElements.stream().mapToInt(JRElement::getWidth).sum();
     List<JRElement> finalBandElements = CustomiserHelper.remove(excludeKeys, initialBandElements);
@@ -76,16 +79,31 @@ public class CustomiserHelper {
     // Precision fear: Not sure about this double though,int should work.
     double rebalanceFactor = (double) initialTableWidth / finalTableWidth;
     CustomiserHelper.hideElements(excludeKeys, band);
-    CustomiserHelper.resizeElements(finalBandElements, rebalanceFactor);
+    CustomiserHelper.resizeElements(xCoOrdStartsAt,finalBandElements, rebalanceFactor);
   }
 
-  public static void rebalance(
+  public static void rebalance(Integer xCoOrdStartsAt,
       JRBand band,
       Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs,
       ColumnType columnType) {
+    List<String> elementKeys = getElementKeysMap(columnHeaderFieldPairs,columnType).get("elementKeys");
+    List<String> excludedKeys = getElementKeysMap(columnHeaderFieldPairs,columnType).get("excludedKeys");
+    rebalance(xCoOrdStartsAt,band, excludedKeys, elementKeys);
+  }
+
+  public static void rebalance(
+          JRBand band,
+          Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs,
+          ColumnType columnType) {
+    List<String> elementKeys = getElementKeysMap(columnHeaderFieldPairs,columnType).get("elementKeys");
+    List<String> excludedKeys = getElementKeysMap(columnHeaderFieldPairs,columnType).get("excludedKeys");
+    rebalance(null,band, excludedKeys, elementKeys);
+  }
+
+  private static Map<String, List<String>> getElementKeysMap(Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs, ColumnType columnType){
     if (columnType == null) {
       throw new IllegalArgumentException(
-          "The column type is unspecified. \n Please ensure column type is set.");
+              "The column type is unspecified. \n Please ensure column type is set.");
     }
     List<String> elementKeys;
     List<String> excludedKeys;
@@ -97,9 +115,9 @@ public class CustomiserHelper {
       elementKeys = getElementKeys(columnHeaderFieldPairs,ColumnHeaderFieldPair::getFieldKey);
     } else {
       throw new IllegalArgumentException(
-          String.format("The specified column type (%s) isn't supported.", columnType.getType()));
+              String.format("The specified column type (%s) isn't supported.", columnType.getType()));
     }
-    rebalance(band, excludedKeys, elementKeys);
+    return Map.of("excludedKeys", excludedKeys, "elementKeys", elementKeys);
   }
 
   private static List<String> getExcludedKeys(Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs, Function<ColumnHeaderFieldPair, String> mapFunc){

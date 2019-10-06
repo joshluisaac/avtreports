@@ -36,6 +36,9 @@ public class SuccessfulElectionsCustomiser
       JRBand detailBand = design.getDetailSection().getBands()[0];
       CustomiserHelper.rebalance(columnHeaderBand, COLUMN_FIELD_PAIRS, ColumnType.HEADER);
       CustomiserHelper.rebalance(detailBand, COLUMN_FIELD_PAIRS, ColumnType.DETAIL);
+
+      //CustomiserHelper.rebalance(0,columnHeaderBand, COLUMN_FIELD_PAIRS, ColumnType.HEADER);
+      //CustomiserHelper.rebalance(0, detailBand, COLUMN_FIELD_PAIRS, ColumnType.DETAIL);
     }
   }
 }
