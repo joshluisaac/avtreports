@@ -9,7 +9,8 @@ public class TestReportEntry {
   private BigDecimal outstandingBalance;
   private String phoneNumber;
 
-  public TestReportEntry(String name, String email, BigDecimal outstandingBalance, String phoneNumber) {
+  public TestReportEntry(
+      String name, String email, BigDecimal outstandingBalance, String phoneNumber) {
     this.name = name;
     this.email = email;
     this.outstandingBalance = outstandingBalance;

@@ -1,8 +1,9 @@
 package iad.reports;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +16,8 @@ public class JasperReportSupplierTest {
   @Rule public ExpectedException expectedExpThrown = ExpectedException.none();
   private static final String REPORT_ID_NOT_EXIST = "TestReport1/thisReportDoesNotExist.jasper";
   private static final String REPORT_ID = "TestReport2/TestReport2_ForTestPurposes.jasper";
-  private static final String COMMON_REPORT_ID = "TestReportCommon/CommonReport_ForTestPurposes.jasper";
+  private static final String COMMON_REPORT_ID =
+      "TestReportCommon/CommonReport_ForTestPurposes.jasper";
   private List<String> allowedReportDirs;
 
   @Before
@@ -26,7 +28,7 @@ public class JasperReportSupplierTest {
 
   @Test
   public void testReportSizeShouldBeGreatThanZero() {
-    Assert.assertTrue(reportSupplier.getReport(COMMON_REPORT_ID).length > 0);
+    assertTrue(reportSupplier.getReport(COMMON_REPORT_ID).length > 0);
   }
 
   /** TestReport1 trying to access TestReport2 throws exception */
@@ -63,6 +65,6 @@ public class JasperReportSupplierTest {
 
   @Test
   public void testShouldReturnTrueIfReportFileNameEndsWithJasper() {
-    Assert.assertTrue(reportSupplier.isReportFileName(REPORT_ID));
+    assertTrue(reportSupplier.isReportFileName(REPORT_ID));
   }
 }

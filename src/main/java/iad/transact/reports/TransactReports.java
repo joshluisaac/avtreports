@@ -4,7 +4,6 @@ import iad.reports.ReportGenerator;
 import iad.transact.reports.accesssummary.AccessSummaryReportData;
 import iad.transact.reports.corporateactionelection.CorporateActionElectionReportData;
 import iad.transact.reports.corporateactionelection.SuccessfulElectionsCustomiser;
-
 import java.util.Map;
 
 public final class TransactReports {
@@ -13,7 +12,11 @@ public final class TransactReports {
       new TransactReportGenerator<>("AccessSummary", null);
 
   public static final ReportGenerator<CorporateActionElectionReportData> CORPORATE_ACTION_ELECTION =
-      new TransactReportGenerator<>("CorporateActionElection", null);
+      new TransactReportGenerator<>(
+          "CorporateActionElection",
+          Map.of(
+              "CorporateActionElection/SuccessfulElections.jasper",
+              new SuccessfulElectionsCustomiser()));
 
   private TransactReports() {}
 }

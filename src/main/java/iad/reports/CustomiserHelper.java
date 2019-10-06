@@ -2,6 +2,7 @@ package iad.reports;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRElement;
@@ -13,17 +14,6 @@ public class CustomiserHelper {
 
   private CustomiserHelper() {}
 
-  // done to avoid repeated casting
-  public static JRDesignElement getDesignElementByKey(JRElementGroup band, String key) {
-    return (JRDesignElement) band.getElementByKey(key);
-  }
-
-  public static void hideElementByKey(JRBand band, String key) {
-    JRDesignElement designElement = getDesignElementByKey(band, key);
-    designElement.setPrintWhenExpression(new JRDesignExpression());
-  }
-
-  // iterates over the keys to build report elements
   public static List<JRElement> getBandElementsByKeys(JRElementGroup band, Iterable<String> keys) {
     List<JRElement> reportElements = new ArrayList<>();
     keys.forEach(
@@ -38,12 +28,12 @@ public class CustomiserHelper {
     return reportElements;
   }
 
-  public static void updateElement(List<JRElement> columnElements, double rebalanceFactor) {
+  public static void resizeElements(List<JRElement> bandElements, double rebalanceFactor) {
     AtomicInteger totalWidth = new AtomicInteger(0);
-    IntStream.range(0, columnElements.size())
+    IntStream.range(0, bandElements.size())
         .forEach(
             index -> {
-              JRElement column = columnElements.get(index);
+              JRElement column = bandElements.get(index);
               double newWidth = (column.getWidth() * rebalanceFactor);
               if (index == 0) {
                 column.setWidth((int) Math.round(newWidth));
@@ -59,10 +49,66 @@ public class CustomiserHelper {
     keys.forEach(entry -> CustomiserHelper.hideElementByKey(band, entry));
   }
 
-    public static List<JRElement> remove(
-            List<String> keys, List<JRElement> bandElements) {
-        List<JRElement> elements = new ArrayList<>(bandElements);
-        elements.removeIf(element -> keys.contains(element.getKey()));
-        return elements;
+  public static List<JRElement> remove(Collection<String> keys, List<JRElement> bandElements) {
+    List<JRElement> elements = new ArrayList<>(bandElements);
+    elements.removeIf(element -> keys.contains(element.getKey()));
+    return elements;
+  }
+
+  private static void rebalance(JRBand band, List<String> excludeKeys, List<String> elementKeys) {
+    List<JRElement> initialBandElements = CustomiserHelper.getBandElementsByKeys(band, elementKeys);
+    int initialTableWidth = initialBandElements.stream().mapToInt(JRElement::getWidth).sum();
+    List<JRElement> finalBandElements = CustomiserHelper.remove(excludeKeys, initialBandElements);
+    int finalTableWidth = finalBandElements.stream().mapToInt(JRElement::getWidth).sum();
+    // Precision fear: Not sure about this double though,int should work.
+    double rebalanceFactor = (double) initialTableWidth / finalTableWidth;
+    CustomiserHelper.hideElements(excludeKeys, band);
+    CustomiserHelper.resizeElements(finalBandElements, rebalanceFactor);
+  }
+
+  public static void rebalance(
+      JRBand band,
+      Collection<ColumnHeaderFieldPair> columnHeaderFieldPairs,
+      ColumnType columnType) {
+    if (columnType == null) {
+      throw new IllegalArgumentException(
+          "The column type is unspecified. \n Please ensure column type is set.");
     }
+    List<String> elementKeys;
+    List<String> excludedKeys;
+    if (columnType.getType().equals("H")) {
+      excludedKeys =
+          columnHeaderFieldPairs.stream()
+              .filter(ColumnHeaderFieldPair::isExcluded)
+              .map(ColumnHeaderFieldPair::getColumnKey)
+              .collect(Collectors.toList());
+      elementKeys =
+          columnHeaderFieldPairs.stream()
+              .map(ColumnHeaderFieldPair::getColumnKey)
+              .collect(Collectors.toList());
+    } else if (columnType.getType().equals("FD")) {
+      excludedKeys =
+          columnHeaderFieldPairs.stream()
+              .filter(ColumnHeaderFieldPair::isExcluded)
+              .map(ColumnHeaderFieldPair::getFieldKey)
+              .collect(Collectors.toList());
+      elementKeys =
+          columnHeaderFieldPairs.stream()
+              .map(ColumnHeaderFieldPair::getFieldKey)
+              .collect(Collectors.toList());
+    } else {
+      throw new IllegalArgumentException(
+          String.format("The specified column type (%s) isn't supported.", columnType.getType()));
+    }
+    rebalance(band, excludedKeys, elementKeys);
+  }
+
+  public static JRDesignElement getDesignElementByKey(JRElementGroup band, String key) {
+    return (JRDesignElement) band.getElementByKey(key);
+  }
+
+  public static void hideElementByKey(JRBand band, String key) {
+    JRDesignElement designElement = getDesignElementByKey(band, key);
+    designElement.setPrintWhenExpression(new JRDesignExpression());
+  }
 }

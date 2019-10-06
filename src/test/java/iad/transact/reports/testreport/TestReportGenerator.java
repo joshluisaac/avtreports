@@ -26,11 +26,16 @@ public class TestReportGenerator {
   public void beforeTestReportGenerator() {
     reportName = "TestBasicReport";
     TestReportEntry row1 =
-        new TestReportEntry("TestNameA", "TestNameA@mail.com", new BigDecimal("120.48"),"04-901-765");
+        new TestReportEntry(
+            "TestNameA", "TestNameA@mail.com", new BigDecimal("120.48"), "04-901-765");
     TestReportEntry row2 =
-        new TestReportEntry("TestNameB", "TestNameB@mail.com", new BigDecimal("190.07"),"04-900-765");
+        new TestReportEntry(
+            "TestNameB", "TestNameB@mail.com", new BigDecimal("190.07"), "04-900-765");
     testReportFakeData = new TestReportFakeData(List.of(row1, row2));
-    reportGenerator = new TransactReportGenerator<>(reportName, Map.of("TestBasicReport/TestReportDetails.jasper", new TestReportCustomiser()));
+    reportGenerator =
+        new TransactReportGenerator<>(
+            reportName,
+            Map.of("TestBasicReport/TestReportDetails.jasper", new TestReportCustomiser()));
   }
 
   @Test @SneakyThrows

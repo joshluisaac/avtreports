@@ -1,0 +1,13 @@
+{
+  "Main": {
+    "successfulElections": [],
+    "failedElections": [],
+    "electionEndDate": "17/10/2019 00:00:00 am",
+    "corporateActionName": "Mithras Investment Trust (MTH) LIQUIDATING",
+    "totalElectionSize": 0,
+    "failedElectionSize": 0,
+    "successfulElectionSize": 0,
+    "electionOnDate": "10/09/2019 10:25:39 am",
+    "isMifidReportable": false
+  }
+}

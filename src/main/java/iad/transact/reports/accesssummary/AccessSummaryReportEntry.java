@@ -1,10 +1,16 @@
 package iad.transact.reports.accesssummary;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.time.LocalDateTime;
+
 public class AccessSummaryReportEntry {
 
   private String loggedInAs;
   private String accessed;
-  private String eventDateTime;
+
+  @JsonDeserialize(using = AccessSummaryEventDateTimeHandler.class)
+  private LocalDateTime eventDateTime;
+
   private String eventDisplayMessage;
   private String confirmationKey;
 
@@ -21,7 +27,7 @@ public class AccessSummaryReportEntry {
   public static class Builder {
     private String loggedInAs;
     private String accessed;
-    private String eventDateTime;
+    private LocalDateTime eventDateTime;
     private String eventDisplayMessage;
     private String confirmationKey;
 
@@ -35,7 +41,7 @@ public class AccessSummaryReportEntry {
       return this;
     }
 
-    public Builder setEventDateTime(String eventDateTime) {
+    public Builder setEventDateTime(LocalDateTime eventDateTime) {
       this.eventDateTime = eventDateTime;
       return this;
     }
@@ -63,7 +69,7 @@ public class AccessSummaryReportEntry {
     return accessed;
   }
 
-  public String getEventDateTime() {
+  public LocalDateTime getEventDateTime() {
     return eventDateTime;
   }
 

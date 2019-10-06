@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -17,20 +18,20 @@ import javax.imageio.ImageIO;
 public class AccessSummaryReportFakeData {
 
   @SneakyThrows
-  public static List<AccessSummaryReportEntry> getAccessSummaryReportData() {
+  private static List<AccessSummaryReportEntry> getAccessSummaryReportData() {
     InputStream inputStream =
-            Thread.currentThread()
-                    .getContextClassLoader()
-                    .getResourceAsStream("datasets/AccessSummary/AccessSummaryData.json");
+        Thread.currentThread()
+            .getContextClassLoader()
+            .getResourceAsStream("datasets/AccessSummary/AccessSummaryDataSet.json");
     JsonNode parent = new ObjectMapper().readTree(inputStream);
     return new ObjectMapper()
-            .readValue(
-                    parent.path("Main").path("data").toString(),
-                    new TypeReference<List<AccessSummaryReportEntry>>() {});
+        .readValue(
+            parent.path("Main").path("data").toString(),
+            new TypeReference<List<AccessSummaryReportEntry>>() {});
   }
 
   @SneakyThrows
-  public static HeaderData getHeaderData(String graphicContent, String brandingHeaderText) {
+  private static HeaderData getHeaderData(String graphicContent, String brandingHeaderText) {
     return new HeaderData.Builder()
         .setHeaderImage(
             ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(graphicContent))))
@@ -38,15 +39,14 @@ public class AccessSummaryReportFakeData {
         .build();
   }
 
-  @SneakyThrows
   public static AccessSummaryReportData buildReportData() {
     return new AccessSummaryReportData(
         AccessSummaryReportFakeData.getAccessSummaryReportData(),
-        () ->
-            AccessSummaryReportFakeData.getHeaderData(
-                FakeBrandingHeaderImage.getGraphicText(), FakeBrandingHeader.getText()),
+        AccessSummaryReportFakeData.getHeaderData(
+            FakeBrandingHeaderImage.getGraphicText(), FakeBrandingHeader.getText()),
         "All Events",
         "Marc O'Hara",
-        "1st October 2018 to 31st October 2018");
+        LocalDate.now().minusMonths(10),
+        LocalDate.now());
   }
 }

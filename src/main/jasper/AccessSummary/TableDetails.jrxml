@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TableDetails" pageWidth="782" pageHeight="545" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="682" leftMargin="50" rightMargin="50" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="ireport.callouts" value="callouts.1.fg=0,0,0\ncallouts.1.text=eventDateTime should be localdate and not string\ncallouts.1.bounds=50,190,198,198\ncallouts.1.bg=255,255,0\n"/>
+	<import value="java.time.format.DateTimeFormatter"/>
+	<import value="java.time.LocalDateTime"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
 	<field name="loggedInAs" class="java.lang.String"/>
 	<field name="accessed" class="java.lang.String"/>
-	<field name="eventDateTime" class="java.lang.String"/>
+	<field name="eventDateTime" class="java.time.LocalDateTime"/>
 	<field name="eventDisplayMessage" class="java.lang.String"/>
 	<columnHeader>
 		<band height="14" splitType="Stretch">
@@ -49,7 +50,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="styled"/>
-				<textFieldExpression><![CDATA[$F{loggedInAs}.replaceAll("&","&amp;").replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{loggedInAs}.replaceAll("&","&amp;").replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1\n")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="TableDataMedium" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="163" y="3" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="1047e6ea-e6a7-4962-96fe-cd15587607a8"/>
@@ -60,9 +61,9 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="styled"/>
-				<textFieldExpression><![CDATA[$F{accessed}.replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1<br/>")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{accessed}.replaceAll("(\\(Adviser\\)|\\(Investor\\)|\\(Firm\\)|\\(Investment Manager\\))", "$1\n")]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy hh:mm a">
 				<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="325" y="3" width="113" height="14" isPrintWhenDetailOverflows="true" uuid="ae41e9bb-e6bd-4bd6-a24b-5aeba46effd3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -73,7 +74,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy hh:mm a").format((Date) new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse($F{eventDateTime}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{eventDateTime}.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy hh:mm a"))]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="TableDataMedium" stretchType="ContainerHeight" x="440" y="3" width="242" height="14" isPrintWhenDetailOverflows="true" uuid="36c4e244-7c76-4129-b976-baba042172c0"/>

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Header" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Header" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="923e7613-6969-4a0b-b30a-ab640ab60264">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<template><![CDATA["Common/Styles.jrtx"]]></template>
+	<parameter name="HEADER_DATA" class="iad.transact.reports.corporateactionelection.CorporateActionElectionReportHeaderData"/>
 	<field name="corporateActionName" class="java.lang.String"/>
 	<field name="electionEndDate" class="java.lang.String"/>
 	<field name="electionOnDate" class="java.lang.String"/>
 	<field name="successfulOfTotalElectionSize" class="java.lang.String"/>
-	<title>
+	<summary>
 		<band height="67">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="DefaultText" x="165" y="11" width="500" height="14" uuid="99906d64-0aaf-46ac-840a-c49b11cfcc13"/>
+				<textFieldExpression><![CDATA[$P{HEADER_DATA}.getCorporateActionName()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="DefaultText" x="165" y="25" width="500" height="14" uuid="1560f0f5-fcf3-4009-8494-ef4394998e9d"/>
+				<textFieldExpression><![CDATA[$P{HEADER_DATA}.getElectionEndDate()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="DefaultText" x="165" y="39" width="500" height="14" uuid="504db99c-e4b6-4788-985a-f541d50bb58c"/>
+				<textFieldExpression><![CDATA[$P{HEADER_DATA}.getElectionOnDate()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="DefaultText" x="165" y="53" width="500" height="14" uuid="1ca0686e-0825-4c33-a257-1452aa1365b2"/>
+				<textFieldExpression><![CDATA[$P{HEADER_DATA}.getSuccessfulOfTotalElectionSize()]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement style="DefaultText" x="7" y="53" width="150" height="14" uuid="108b15f7-f7b3-453a-97ef-4e94415359a3"/>
 				<text><![CDATA[Successful elections]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement style="DefaultText" x="165" y="53" width="500" height="14" uuid="1ca0686e-0825-4c33-a257-1452aa1365b2"/>
-				<textFieldExpression><![CDATA[$F{successfulOfTotalElectionSize}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement style="DefaultText" x="165" y="39" width="500" height="14" uuid="504db99c-e4b6-4788-985a-f541d50bb58c"/>
-				<textFieldExpression><![CDATA[$F{electionOnDate}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement style="DefaultText" x="165" y="25" width="500" height="14" uuid="1560f0f5-fcf3-4009-8494-ef4394998e9d"/>
-				<textFieldExpression><![CDATA[$F{electionEndDate}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement style="DefaultText" x="165" y="11" width="500" height="14" uuid="99906d64-0aaf-46ac-840a-c49b11cfcc13"/>
-				<textFieldExpression><![CDATA[$F{corporateActionName}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement style="DefaultText" stretchType="RelativeToTallestObject" x="7" y="11" width="150" height="14" uuid="b2ce550f-871a-4336-933c-ab4b7609d806"/>
 				<text><![CDATA[Corporate Action]]></text>
@@ -43,5 +44,5 @@
 				<text><![CDATA[Elected on]]></text>
 			</staticText>
 		</band>
-	</title>
+	</summary>
 </jasperReport>

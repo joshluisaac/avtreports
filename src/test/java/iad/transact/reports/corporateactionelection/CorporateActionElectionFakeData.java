@@ -13,17 +13,13 @@ import java.util.function.Function;
 
 public class CorporateActionElectionFakeData {
 
-  private static final String PAYLOAD =
-      "datasets/CorporateActionElection/CorporateActionElectionSampleDataSet.json";
-
   @SneakyThrows
-  private static Function<String, JsonNode> getJsonMainNode() {
+  public static Function<String, JsonNode> getJsonMainNode(String payLoad) {
     InputStream inputStream =
-            Thread.currentThread().getContextClassLoader().getResourceAsStream(PAYLOAD);
+        Thread.currentThread().getContextClassLoader().getResourceAsStream(payLoad);
     JsonNode node = new ObjectMapper().readTree(inputStream);
-    return  (key) -> node.path(key);
+    return (key) -> node.path(key);
   }
-
 
   @SneakyThrows
   private static List<CorporateActionElectionEntry> getElections(JsonNode node) {
@@ -43,8 +39,9 @@ public class CorporateActionElectionFakeData {
    *
    * @return corporate action report data
    */
-  public static CorporateActionElectionReportData buildReportData() {
-    Function<String, JsonNode> mainNodeFunction = CorporateActionElectionFakeData.getJsonMainNode();
+  public static CorporateActionElectionReportData buildReportData(
+      Function<String, JsonNode> mainNodeFunction) {
+    // Function<String, JsonNode> mainNodeFunction = getJsonMainNode();
     JsonNode mainNode = mainNodeFunction.apply("Main");
 
     List<CorporateActionElectionEntry> successfulElections =

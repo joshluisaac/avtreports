@@ -1,41 +1,41 @@
 package iad.transact.reports.accesssummary;
 
-import iad.transact.reports.common.HeaderCustomiserData;
+import iad.reports.ReportData;
+import iad.reports.ReportUtils;
 import iad.transact.reports.common.HeaderData;
+import java.time.LocalDate;
 import java.util.List;
 
-public class AccessSummaryReportData implements HeaderCustomiserData {
+public class AccessSummaryReportData implements ReportData {
 
   private List<AccessSummaryReportEntry> accessSummaryData;
-  private HeaderCustomiserData headerCustomiserData;
+  private HeaderData headerData;
   private String summaryType;
   private String realUserName;
-  private String datePeriod;
+  private LocalDate startDate;
+  private LocalDate endDate;
 
   public AccessSummaryReportData(
       List<AccessSummaryReportEntry> accessSummaryData,
-      HeaderCustomiserData headerCustomiserData,
+      HeaderData headerData,
       String summaryType,
       String realUserName,
-      String datePeriod) {
+      LocalDate startDate,
+      LocalDate endDate) {
     this.accessSummaryData = accessSummaryData;
-    this.headerCustomiserData = headerCustomiserData;
+    this.headerData = headerData;
     this.summaryType = summaryType;
     this.realUserName = realUserName;
-    this.datePeriod = datePeriod;
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
-  @Override
   public HeaderData getHeaderData() {
-    return headerCustomiserData.getHeaderData();
+    return headerData;
   }
 
   public List<AccessSummaryReportEntry> getAccessSummaryData() {
     return accessSummaryData;
-  }
-
-  public HeaderCustomiserData getHeaderCustomiserData() {
-    return headerCustomiserData;
   }
 
   public String getSummaryType() {
@@ -46,7 +46,23 @@ public class AccessSummaryReportData implements HeaderCustomiserData {
     return realUserName;
   }
 
-  public String getDatePeriod() {
-    return datePeriod;
+  public LocalDate getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+  }
+
+  public LocalDate getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(LocalDate endDate) {
+    this.endDate = endDate;
+  }
+
+  public String getDatePeriod(LocalDate startDate, LocalDate endDate) {
+    return ReportUtils.getDatePeriodString(startDate, endDate);
   }
 }
